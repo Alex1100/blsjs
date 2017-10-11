@@ -3,7 +3,7 @@
 <code>npm install --save blsjs</code>
 
 <code>
-    import BLS from 'blsjs' || var BLS = require('blsjs')
+    import BLS from 'blsjs' || const BLS = require('blsjs');
 </code>
 
 ## Functions Available
