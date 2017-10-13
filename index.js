@@ -1,24 +1,25 @@
 const industryCodes = require('./utils/industryCodes').industryCodes;
 const regionalCodes = require('./utils/regionalCodes').regionalCodes;
 var dsv = require('d3-dsv');
-var request = require('request');
+var rp = require('request-promise');
+var Promise = require('bluebird');
 
-function qcewRequest(urlPath, callback){
-  const format = {
+function qcewRequest(urlPath, callback, format){
+  var formatters = {
     json: function(body){
       return dsv.csvParse(body);
     }
   };
 
-  request(urlPath, function(err, response, body){
+  rp(urlPath)
+  .then(response => {
     var data;
-    if (!err && response.statusCode == 200){
-      data = format['json'](body);
-      callback(null, data);
-    } else {
-      callback(err);
-    }
-  });
+    data = formatters[format](response);
+    callback(null, data);
+  })
+  .catch(err => {
+    callback(err);
+  })
 };
 
 getAreaData = (year, qtr, area, callback) => {
