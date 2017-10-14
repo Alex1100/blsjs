@@ -10,9 +10,9 @@
 
 - All arguments are strings
 
-- specificIndustryNationalData
+- specificIndustryLocalData
     <code>
-        BLS.specificIndustryNationalData(year, quarter, region, industry)
+        BLS.specificIndustryLocalData(year, quarter, region, industry)
     </code>
 
 - allLocalData

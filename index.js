@@ -23,17 +23,17 @@ function qcewRequest(urlPath, callback){
 };
 
 getAreaData = (year, qtr, area, callback) => {
-  const urlPath = `http://www.bls.gov/cew/data/api/${year}/${qtr}/area/${area}.csv`;
+  const urlPath = `https://www.bls.gov/cew/data/api/${year}/${qtr}/area/${area}.csv`;
   qcewRequest(urlPath, callback);
 };
 
 getIndustryData = (year, qtr, industry, callback) => {
-  const urlPath = `http://www.bls.gov/cew/data/api/${year}/${qtr}/industry/${industry}.csv`;
+  const urlPath = `https://www.bls.gov/cew/data/api/${year}/${qtr}/industry/${industry}.csv`;
   qcewRequest(urlPath, callback);
 };
 
 getSizeData = (year, size, callback) => {
-  const urlPath = `http://www.bls.gov/cew/data/api/${year}/${qtr}/size/${size}.csv`;
+  const urlPath = `https://www.bls.gov/cew/data/api/${year}/${qtr}/size/${size}.csv`;
   qcewRequest(urlPath, callback);
 };
 
@@ -65,13 +65,16 @@ getAllLocalData = (info, callback) => {
   });
 };
 
-specificIndustryNationalData = (year, quarter, region, industry) => {
+specificIndustryLocalData = (year, quarter, region, industry) => {
   return new Promise((resolve, reject) => {
     getSpecificIndustryLocalData([year, quarter, region, industry], (d) => {
       resolve(d);
     })
   })
-  .then(result => console.log(result));
+  .then(result => {
+    console.log(result);
+    return result;
+  });
 }
 
 allLocalData = (year, quarter, region) => {
@@ -80,7 +83,10 @@ allLocalData = (year, quarter, region) => {
       resolve(d);
     })
   })
-  .then(result => console.log(result));
+  .then(result => {
+    console.log(result);
+    return result;
+  });
 }
 
 nationalIndustryData = (year, quarter, industry) => {
@@ -89,7 +95,10 @@ nationalIndustryData = (year, quarter, industry) => {
       resolve(d);
     })
   })
-  .then(result => console.log(result));
+  .then(result => {
+    console.log(result);
+    return result;
+  });
 };
 
 allIndustriesNationalData = (year, quarter) => {
@@ -98,7 +107,10 @@ allIndustriesNationalData = (year, quarter) => {
       resolve(d);
     })
   })
-  .then(result => console.log(result));
+  .then(result => {
+    console.log(result);
+    return result;
+  });
 };
 
 allRegionalCodes = () => {
@@ -113,7 +125,7 @@ allIndustryCodes = () => {
 
 
 module.exports = {
-  specificIndustryNationalData,
+  specificIndustryLocalData,
   allLocalData,
   nationalIndustryData,
   allIndustriesNationalData,
