@@ -1,6 +1,6 @@
 {
   "name": "blsjs",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Bureau Of Labor Statistics (BLS) CSV Data to JSON parser",
   "main": "index.js",
   "scripts": {
