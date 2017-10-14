@@ -4,7 +4,7 @@ var dsv = require('d3-dsv');
 var rp = require('request-promise');
 var Promise = require('bluebird');
 
-function qcewRequest(urlPath, callback, format){
+function qcewRequest(urlPath, callback){
   var formatters = {
     json: function(body){
       return dsv.csvParse(body);
@@ -14,7 +14,7 @@ function qcewRequest(urlPath, callback, format){
   rp(urlPath)
   .then(response => {
     var data;
-    data = formatters[format](response);
+    data = formatters['json'](response);
     callback(null, data);
   })
   .catch(err => {
@@ -110,6 +110,7 @@ allIndustryCodes = () => {
   console.log({_IndustrialCodes: industryCodes});
   return {_IndustrialCodes: industryCodes};
 }
+
 
 module.exports = {
   specificIndustryNationalData,
