@@ -37,6 +37,13 @@ getSizeData = (year, size, callback) => {
   qcewRequest(urlPath, callback);
 };
 
+findIndustryDataNationally = (info, callback) => {
+  getIndustryData(info[0], info[1], info[2], (err, industryData) => {
+    if(err) throw err;
+    callback(industryData);
+  })
+}
+
 getSpecificIndustryNationalData = (info, callback) => {
   getAreaData(info[0], info[1], info[2], (err, areaData) => {
     if(err) throw err;
@@ -64,6 +71,8 @@ getAllLocalData = (info, callback) => {
     callback(areaData);
   });
 };
+
+
 
 specificIndustryLocalData = (year, quarter, region, industry) => {
   return new Promise((resolve, reject) => {
@@ -113,6 +122,21 @@ allIndustriesNationalData = (year, quarter) => {
   });
 };
 
+allIndustryDataNationally = (year, quarter, industry) => {
+  return new Promise((resolve, reject) => {
+    findIndustryDataNationally = (info, callback) => {
+      getIndustryData(info[0], info[1], info[2], (err, industryData) => {
+        if(err) throw err;
+        callback(industryData);
+      })
+    }
+  })
+  .then(result => {
+    console.log(result);
+    return result;
+  })
+}
+
 allRegionalCodes = () => {
   console.log({_RegionalCodes: regionalCodes});
   return {_RegionalCodes: regionalCodes};
@@ -129,6 +153,7 @@ module.exports = {
   allLocalData,
   nationalIndustryData,
   allIndustriesNationalData,
+  allIndustryDataNationally,
   allRegionalCodes,
   allIndustryCodes
 }
